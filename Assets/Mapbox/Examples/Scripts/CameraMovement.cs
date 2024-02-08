@@ -23,40 +23,7 @@ namespace Mapbox.Examples
 		Vector3 _delta;
 		bool _shouldDrag;
 
-		void HandleTouch()
-		{
-			float zoomFactor = 0.0f;
-			//pinch to zoom. 
-			switch (Input.touchCount)
-			{
-				case 1:
-					{
-						HandleMouseAndKeyBoard();
-					}
-					break;
-				case 2:
-					{
-						// Store both touches.
-						Touch touchZero = Input.GetTouch(0);
-						Touch touchOne = Input.GetTouch(1);
-
-						// Find the position in the previous frame of each touch.
-						Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-						Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-						// Find the magnitude of the vector (the distance) between the touches in each frame.
-						float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-						float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
-						// Find the difference in the distances between each frame.
-						zoomFactor = 0.05f * (touchDeltaMag - prevTouchDeltaMag);
-					}
-					ZoomMapUsingTouchOrMouse(zoomFactor);
-					break;
-				default:
-					break;
-			}
-		}
+		
 
 		void ZoomMapUsingTouchOrMouse(float zoomFactor)
 		{
@@ -96,15 +63,22 @@ namespace Mapbox.Examples
 					return;
 				}
 
-				var x = Input.GetAxis("Horizontal");
-				var z = Input.GetAxis("Vertical");
-				var y = Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed;
-				if (!(Mathf.Approximately(x, 0) && Mathf.Approximately(y, 0) && Mathf.Approximately(z, 0)))
-				{
-					transform.localPosition += transform.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
-					_map.UpdateMap();
-				}
-			}
+				//var x = Input.GetAxis("Horizontal");
+				//var z = Input.GetAxis("Vertical");
+				//var y = Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed;
+				//if (!(Mathf.Approximately(x, 0) && Mathf.Approximately(y, 0) && Mathf.Approximately(z, 0)))
+				//{
+				//	transform.localPosition += transform.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
+				//	_map.UpdateMap();
+				//}
+                // Ignore Horizontal and Vertical axis
+                var y = Input.GetAxis("Mouse ScrollWheel") * _zoomSpeed;
+                if (!(Mathf.Approximately(y, 0)))
+                {
+                    transform.localPosition += transform.forward * y;
+                    _map.UpdateMap();
+                }
+            }
 
 
 		}
@@ -135,14 +109,9 @@ namespace Mapbox.Examples
 		void LateUpdate()
 		{
 
-			if (Input.touchSupported && Input.touchCount > 0)
-			{
-				HandleTouch();
-			}
-			else
-			{
+			
 				HandleMouseAndKeyBoard();
-			}
+			
 		}
 	}
 }
