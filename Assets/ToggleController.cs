@@ -6,8 +6,11 @@ using Mapbox.Unity.Map;
 
 public class ToggleSettingsController : MonoBehaviour
 {
-    public Toggle toggle;
-    public Text statusText;
+    public Toggle toggleLiveTraffic;
+    public Toggle toggleCarMode;
+    public Text statusTextLiveTraffic;
+    public Text statsuTextCarMode;
+    public GameObject carObject;
     public AbstractMap Map;
 
 
@@ -20,7 +23,8 @@ public class ToggleSettingsController : MonoBehaviour
     {
         // Set initial to false
         //OnToggleValueChanged(false);
-        toggle.onValueChanged.AddListener(OnToggleValueChanged);
+        toggleLiveTraffic.onValueChanged.AddListener(OnToggleLiveTrafficValueChanged);
+        toggleCarMode.onValueChanged.AddListener(OnToggleCarModeValueChanged);
     }
 
     // Update is called once per frame
@@ -29,14 +33,26 @@ public class ToggleSettingsController : MonoBehaviour
 
     }
 
-    void OnToggleValueChanged(bool isOn)
+    void OnToggleLiveTrafficValueChanged(bool isOn)
     {
         _enabled = isOn;
         Map.UpdateMapFeatures();
-        statusText.text = isOn ? "Live Traffic On" : "Live Traffic Off";
+        statusTextLiveTraffic.text = isOn ? "Live Traffic On" : "Live Traffic Off";
+        statusTextLiveTraffic.color = isOn ? _activeColor : _inactiveColor;
+    }
+    void OnToggleCarModeValueChanged(bool isOn)
+    {
+        statsuTextCarMode.text = isOn ? "Car Mode On" : "Car Mode Off";
+        statsuTextCarMode.color = isOn ? _activeColor : _inactiveColor;
 
-
-        statusText.color = isOn ? _activeColor : _inactiveColor;
+        if (carObject != null)
+        {
+            carObject.SetActive(isOn);
+        }
+        else
+        {
+            Debug.LogError("Error: Car Object is not assigned in the Unity Editor.");
+        }
     }
 
     public bool IsEnabled
