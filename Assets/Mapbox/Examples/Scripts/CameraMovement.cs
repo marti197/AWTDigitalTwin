@@ -9,8 +9,8 @@ namespace Mapbox.Examples
 		[SerializeField]
 		AbstractMap _map;
 
-		[SerializeField]
-		float _panSpeed = 20f;
+		//[SerializeField]
+		//float _panSpeed = 20f;
 
 		[SerializeField]
 		float _zoomSpeed = 50f;
