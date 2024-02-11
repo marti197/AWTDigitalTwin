@@ -112,13 +112,13 @@ namespace Mapbox.Examples
 				futurePositions.Remove(nextPos);
 
 				moving = true;
-				characterAnimator.SetBool("IsWalking", true);
+				//characterAnimator.SetBool("IsWalking", true);
 				StartCoroutine(MoveTo());
 			}
 			else if (futurePositions.Count <= 0)
 			{
 				moving = false;
-				characterAnimator.SetBool("IsWalking", false);
+				//characterAnimator.SetBool("IsWalking", false);
 			}
 		}
 
