@@ -6,12 +6,16 @@ using Mapbox.Unity.Map;
 
 public class ToggleSettingsController : MonoBehaviour
 {
+    [Header("UI")]
     public Toggle toggleLiveTraffic;
     public Toggle toggleCarMode;
     public Text statusTextLiveTraffic;
     public Text statsuTextCarMode;
-    public GameObject carObject;
+
+    [Header("References")]
+    //public GameObject carObject;
     public AbstractMap Map;
+    public CarMouseController controller;
 
 
     private Color _activeColor = Color.green;
@@ -44,15 +48,23 @@ public class ToggleSettingsController : MonoBehaviour
     {
         statsuTextCarMode.text = isOn ? "Car Mode On" : "Car Mode Off";
         statsuTextCarMode.color = isOn ? _activeColor : _inactiveColor;
-
-        if (carObject != null)
+        if (isOn)
         {
-            carObject.SetActive(isOn);
+            controller.EnableCharacter();
         }
         else
         {
-            Debug.LogError("Error: Car Object is not assigned in the Unity Editor.");
+            controller.DisableCharacter();
         }
+        //if (carObject != null)
+        //{
+        //    carObject.SetActive(isOn);
+
+        //}
+        //else
+        //{
+        //    Debug.LogError("Error: Car Object is not assigned in the Unity Editor.");
+        //}
     }
 
     public bool IsEnabled
