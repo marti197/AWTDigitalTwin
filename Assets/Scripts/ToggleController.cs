@@ -2,18 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mapbox.Unity.Map;
 
-public class ToggleController : MonoBehaviour
+public class ToggleSettingsController : MonoBehaviour
 {
-    public Toggle toggle;
-    public Text statusText;
+    [Header("UI")]
+    public Toggle toggleLiveTraffic;
+    public Toggle toggleCarMode;
+    public Text statusTextLiveTraffic;
+    public Text statsuTextCarMode;
+
+    [Header("References")]
+    //public GameObject carObject;
+    public AbstractMap Map;
+    public CarMouseController controller;
+
+
     private Color _activeColor = Color.green;
     private Color _inactiveColor = Color.red;
+    private bool _enabled = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        toggle.onValueChanged.AddListener(OnToggleValueChanged);
+        // Set initial to false
+        //OnToggleValueChanged(false);
+        toggleLiveTraffic.onValueChanged.AddListener(OnToggleLiveTrafficValueChanged);
+        toggleCarMode.onValueChanged.AddListener(OnToggleCarModeValueChanged);
     }
 
     // Update is called once per frame
@@ -21,13 +36,42 @@ public class ToggleController : MonoBehaviour
     {
 
     }
-    
-    void OnToggleValueChanged(bool isOn)
-    {
-        
-        statusText.text = isOn ? "Live Traffic On" : "Live Traffic Off";
 
-        // Ändern Sie die Farbe des Texts basierend auf dem Toggle-Zustand
-        statusText.color = isOn ? _activeColor : _inactiveColor;
+    void OnToggleLiveTrafficValueChanged(bool isOn)
+    {
+        _enabled = isOn;
+        Map.UpdateMapFeatures();
+        statusTextLiveTraffic.text = isOn ? "Live Traffic On" : "Live Traffic Off";
+        statusTextLiveTraffic.color = isOn ? _activeColor : _inactiveColor;
+    }
+    void OnToggleCarModeValueChanged(bool isOn)
+    {
+        statsuTextCarMode.text = isOn ? "Car Mode On" : "Car Mode Off";
+        statsuTextCarMode.color = isOn ? _activeColor : _inactiveColor;
+        if (isOn)
+        {
+            controller.EnableCharacter();
+        }
+        else
+        {
+            controller.DisableCharacter();
+        }
+        //if (carObject != null)
+        //{
+        //    carObject.SetActive(isOn);
+
+        //}
+        //else
+        //{
+        //    Debug.LogError("Error: Car Object is not assigned in the Unity Editor.");
+        //}
+    }
+
+    public bool IsEnabled
+    {
+        get
+        {
+            return _enabled;
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -417,13 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeac798412ddc0a4c91aba2fc263c434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialLowTraffic: {fileID: 2100000, guid: 345209cc13279414db9639b2843ac3c1, type: 2}
+  MaterialLowTraffic: {fileID: 2100000, guid: 4aef5e72e8c8bf64abcf3053e452380d, type: 2}
   SpeedLowT: 0.5
-  MaterialModerateTraffic: {fileID: 2100000, guid: 5df7ad3e02d78284cbc17810cb387d54, type: 2}
+  MaterialModerateTraffic: {fileID: 2100000, guid: 205a08005f536fd41a188dc26d40a640, type: 2}
   SpeedModerateT: 0.2
-  MaterialHeavyTraffic: {fileID: 2100000, guid: 8350bd50898372246a4e57e5734f4942, type: 2}
+  MaterialHeavyTraffic: {fileID: 2100000, guid: 73c24e9bc27a8ce4e938fc2de7f398ca, type: 2}
   SpeedHeavyT: 0.05
-  MaterialSevereTraffic: {fileID: 2100000, guid: 46e6f9799c66fb648be2fb26a721be4c, type: 2}
+  MaterialSevereTraffic: {fileID: 2100000, guid: db2645c425841924b8866f35abf28e1f, type: 2}
   SpeedSevereT: 0.01
 --- !u!1 &252582824
 GameObject:
@@ -910,6 +910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2537475616670410009, guid: e920ccb7e09f08c4c83ac7d0f992074b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3424801648816573839, guid: e920ccb7e09f08c4c83ac7d0f992074b, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
@@ -968,7 +972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5236152806793397000, guid: e920ccb7e09f08c4c83ac7d0f992074b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6264788360795042878, guid: e920ccb7e09f08c4c83ac7d0f992074b, type: 3}
       propertyPath: m_Pivot.x
