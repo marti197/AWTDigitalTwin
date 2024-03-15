@@ -1,7 +1,12 @@
-# Advanced Web Technology Project
-## Metaverse: Developing Digital Twin experience
+# Advanced Web Technology Project <br> Metaverse: Developing Digital Twin experience
 
-### AI-Assistant settings
+### 1. General Interface
+![alt text](/images/image2.png)
+
+
+<br>
+
+### 2. AI-Assistant settings
 
 You can input any OpenAI API or OpenAI compatible API base path.
 
