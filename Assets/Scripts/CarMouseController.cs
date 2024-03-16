@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Examples;
 using Mapbox.Unity.Map;
+using Mapbox.Utils;
 using UnityEngine.InputSystem;
 
 /*
@@ -32,6 +33,8 @@ public class CarMouseController : MonoBehaviour
     GameObject rayPlane;
     [SerializeField]
     Transform _movementEndPoint;
+    [SerializeField]
+    AbstractMap _map;
 
     [SerializeField]
     LayerMask layerMask;
@@ -66,31 +69,36 @@ public class CarMouseController : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable");
         // using new input system 
-        clickAction = new InputAction(binding: "<Mouse>/leftButton");
+        clickAction = new InputAction(binding: "<Mouse>/rightButton");
         clickAction.performed += ctx => OnClick();
 
         clickAction.Enable();
     }
-    private void OnDisable()
-    {
-
-        clickAction.Disable();
-        if (moveToCoroutine != null)
-        {
-            StopCoroutine(moveToCoroutine);
-        }
-    }
+    //private void OnDisable()
+    //{
+    //    Debug.Log("OnDisable");
+    //    clickAction.Disable();
+    //    if (moveToCoroutine != null)
+    //    {
+    //        StopCoroutine(moveToCoroutine);
+    //    }
+    //}
 
 
     private void OnClick()
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition);
-
+        Debug.Log("Car click!");
+        ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             startPoint.position = transform.localPosition;
             endPoint.position = hit.point;
+            Vector3 clickedPosition = hit.point;
+            // convert point into gps coordinates
+            Vector2d gpsCoordinate = _map.WorldToGeoPosition(clickedPosition);
+            Debug.Log("GPS-Koordinaten: " + gpsCoordinate.x + ", " + gpsCoordinate.y);
             MovementEndpointControl(hit.point, true);
             //Mapbox Directions API
             directions.Query(GetPositions, startPoint, endPoint, map);
@@ -238,6 +246,7 @@ public class CarMouseController : MonoBehaviour
     }
     public void DisableCharacter()
     {
+        Debug.Log("DisableCharacter");
         characterDisabled = true;
         moving = false;
         StopAllCoroutines();
@@ -246,6 +255,7 @@ public class CarMouseController : MonoBehaviour
 
     public void EnableCharacter()
     {
+        Debug.Log("EnableCharacter");
         characterDisabled = false;
         character.SetActive(true);
 
