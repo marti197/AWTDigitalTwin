@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Examples;
 using Mapbox.Unity.Map;
-using UnityEngine.UIElements;
-
+using UnityEngine.InputSystem;
 
 /*
  * This class is created in reference to the AstronautMouseController class from Mapbox.Examples.
@@ -51,6 +50,8 @@ public class CarMouseController : MonoBehaviour
     float clicktime;
     bool moving;
     bool characterDisabled;
+    InputAction clickAction;
+    IEnumerator moveToCoroutine;
 
     void Start()
     {
@@ -60,14 +61,50 @@ public class CarMouseController : MonoBehaviour
             this.enabled = false;
             return;
         }
+
     }
 
+    private void OnEnable()
+    {
+        // using new input system 
+        clickAction = new InputAction(binding: "<Mouse>/leftButton");
+        clickAction.performed += ctx => OnClick();
+
+        clickAction.Enable();
+    }
+    private void OnDisable()
+    {
+
+        clickAction.Disable();
+        if (moveToCoroutine != null)
+        {
+            StopCoroutine(moveToCoroutine);
+        }
+    }
+
+
+    private void OnClick()
+    {
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            startPoint.position = transform.localPosition;
+            endPoint.position = hit.point;
+            MovementEndpointControl(hit.point, true);
+            //Mapbox Directions API
+            directions.Query(GetPositions, startPoint, endPoint, map);
+        }
+    }
     void Update()
     {
         if (characterDisabled)
             return;
         if (camFollowCar) { CamControl(); }
 
+
+        //obsolet with new input system
+        /*
         bool click = false;
 
         if (Input.GetMouseButtonDown(0))
@@ -81,7 +118,7 @@ public class CarMouseController : MonoBehaviour
                 click = true;
             }
         }
-
+        
         if (click)
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -95,6 +132,7 @@ public class CarMouseController : MonoBehaviour
                 directions.Query(GetPositions, startPoint, endPoint, map);
             }
         }
+        */
     }
 
     List<Vector3> futurePositions;
@@ -110,7 +148,11 @@ public class CarMouseController : MonoBehaviour
         if (!moving)
         {
             interruption = false;
-            MoveToNextPlace();
+            if (gameObject.activeSelf)
+            {
+
+                MoveToNextPlace();
+            }
         }
     }
 
@@ -123,7 +165,11 @@ public class CarMouseController : MonoBehaviour
             futurePositions.Remove(nextPos);
 
             moving = true;
-            StartCoroutine(MoveTo());
+            moveToCoroutine = MoveTo();
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(moveToCoroutine);
+            }
         }
         else if (futurePositions.Count <= 0)
         {
@@ -138,8 +184,10 @@ public class CarMouseController : MonoBehaviour
 
         float time = CalculateTime();
         float t = 0;
-
-        StartCoroutine(LookAtNextPos());
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(LookAtNextPos());
+        }
 
         while (t < 1 && !interruption)
         {
@@ -202,7 +250,7 @@ public class CarMouseController : MonoBehaviour
         character.SetActive(true);
 
         // Distance between astronaut in front of the camera 
-        float distanceFromCamera = 30.0f; 
+        float distanceFromCamera = 30.0f;
 
         Quaternion currentCameraRotation = cam.transform.rotation;
 
