@@ -1,13 +1,5 @@
 {
   "dependencies": {
-    "com.nvidia.omniverse.connector": {
-      "version": "file:C:/Users/marti/AppData/Local/ov/pkg/unity-connector-201.0.0/com.nvidia.omniverse.connector",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.editorcoroutines": "1.0.0"
-      }
-    },
     "com.srcnalt.openai-unity": {
       "version": "https://github.com/srcnalt/OpenAI-Unity.git",
       "depth": 0,

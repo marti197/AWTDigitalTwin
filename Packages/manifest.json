@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.nvidia.omniverse.connector": "file:C:/Users/marti/AppData/Local/ov/pkg/unity-connector-201.0.0/com.nvidia.omniverse.connector",
     "com.srcnalt.openai-unity": "https://github.com/srcnalt/OpenAI-Unity.git",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",

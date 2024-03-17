@@ -13,7 +13,7 @@ AI backend server log (LM-Studio)
 
 # 2. How to Run
 
-You aren either run it as a exectubale application or as a Unity project.
+You can run it either as a stand-alone application or as a Unity project.
 
 #### 2.1. Run as a Unity project
 
@@ -25,7 +25,7 @@ To run the geoTwin application as a Unity project, follow these steps:
 
 3. Click the Play button to run the application.
 
-#### 2.2. Run as a exectubale application
+#### 2.2. Run as a stand-alone application
 
 To run the geoTwin application as a exectubale application, follow these steps:
 
