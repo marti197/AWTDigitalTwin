@@ -1,6 +1,6 @@
 # Advanced Web Technology Project <br> Metaverse: Developing Digital Twin experience
 
-### 1. General Interface
+# 1. General Interface
 ![alt text](/images/overview1.png)
 
 ![alt text](/images/overview2.png)
@@ -11,14 +11,30 @@
 AI backend server log (LM-Studio)
 
 
-### 2. Running the geoTwin application
-To run the geoTwin application, follow these steps:
+# 2. How to Run
+
+You aren either run it as a exectubale application or as a Unity project.
+
+#### 2.1. Run as a Unity project
+
+To run the geoTwin application as a Unity project, follow these steps:
+
+1. Open the Unity project in the Unity Editor.
+
+2. In the Unity Editor, open the `DigitalTwin_City_LiveMap` scene (under Assests).
+
+3. Click the Play button to run the application.
+
+#### 2.2. Run as a exectubale application
+
+To run the geoTwin application as a exectubale application, follow these steps:
 
 1. Navigate to the ExecutableApp folder.
+
 2. Run DigitalTwinCity.exe.
 
 
-### 3. AI-Assistant settings
+# 3. AI-Assistant settings
 
 You can input any OpenAI API or **OpenAI compatible API** base path.
 
@@ -37,7 +53,7 @@ For example using LM-Studio backend:
 ![alt text](/images/api-path.png)
 
 
-### 4. View exported Unity project in Omniverse
+# 4. View exported Unity project in Omniverse
 
 To view the exported Unity project in Omniverse, follow these steps:
 
