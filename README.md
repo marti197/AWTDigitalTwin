@@ -64,3 +64,13 @@ To view the exported Unity project in Omniverse, follow these steps:
 5. Open the file.
 
 ![alt text](/images/omniverse-import.png)
+
+# 5. Troubleshooting
+
+If you set your custom AI-backend (e.g. LocalAI, LM-Studio) and see error message in Unity like below, don't worry. 
+
+It will not affect the application.
+
+Because accessing your custom AI-backend do not require API-Key authentication.
+
+![alt text](/images/api-error.png)
