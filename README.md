@@ -35,3 +35,16 @@ For example using LM-Studio backend:
  - `1234` is default port for LM-Studio
 
 ![alt text](/images/api-path.png)
+
+
+### 4. View exported Unity project in Omniverse
+
+To view the exported Unity project in Omniverse, follow these steps:
+
+1. Open the NVIDIA Omniverse Launcher.
+2. In the Exchange menu, search and install the USD Presenter.
+3. Launch the USD Presenter tool from the Library menu.
+4. Through the USD Presenter, browse to the location of the Omniverse\Omniverse_DigitalTwin\City_LiveMap.usd file.
+5. Open the file.
+
+![alt text](/images/omniverse-import.png)

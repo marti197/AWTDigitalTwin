@@ -1,0 +1,4 @@
+mode = "default"
+stage_url = "omniverse://localhost/Users/martin/DigitalTwin/City_LiveMap.usd"
+user_name = "martin"
+version = "1.0"
