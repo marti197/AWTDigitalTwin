@@ -11,9 +11,14 @@
 AI backend server log (LM-Studio)
 
 
-<br>
+### 2. Running the geoTwin application
+To run the geoTwin application, follow these steps:
 
-### 2. AI-Assistant settings
+1. Navigate to the ExecutableApp folder.
+2. Run DigitalTwinCity.exe.
+
+
+### 3. AI-Assistant settings
 
 You can input any OpenAI API or **OpenAI compatible API** base path.
 
